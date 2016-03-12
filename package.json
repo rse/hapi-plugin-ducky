@@ -17,13 +17,9 @@
     "homepage": "https://github.com/rse/hapi-plugin-ducky",
     "bugs":     "https://github.com/rse/hapi-plugin-ducky/issues",
     "dependencies": {
-        "hoek":        "~3.0.4",
         "boom":        "~3.1.2",
         "ducky":       "~2.4.0",
         "cache-lru":   "~1.0.10"
-    },
-    "peerDependencies": {
-        "hapi":        "~13.0.0"
     },
     "engines": {
         "node":        ">=4.0.0"
