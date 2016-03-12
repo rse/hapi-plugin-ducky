@@ -22,7 +22,8 @@ About
 
 This is a small plugin for the [HAPI](http://hapijs.com/) server
 framework for validating REST payloads with the help of the
-[Ducky](http://duckyjs.com/) validation DSL.
+[Ducky](http://duckyjs.com/) validation DSL. This is syntactically more
+concise than the use of HAPI's [Joi](https://github.com/hapijs/joi).
 
 Usage
 -----
