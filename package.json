@@ -1,6 +1,6 @@
 {
     "name":        "hapi-plugin-ducky",
-    "version":     "0.9.0",
+    "version":     "0.9.1",
     "description": "HAPI plugin for validating payloads with Ducky",
     "keywords":    [ "hapi", "plugin", "validate", "payload", "ducky" ],
     "main":        "./hapi-plugin-ducky.js",
