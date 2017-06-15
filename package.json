@@ -19,7 +19,7 @@
     "dependencies": {
         "boom":        "~5.1.0",
         "ducky":       "~2.5.3",
-        "cache-lru":   "~1.0.15"
+        "cache-lru":   "~1.0.16"
     },
     "engines": {
         "node":        ">=4.0.0"
