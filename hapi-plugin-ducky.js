@@ -23,63 +23,59 @@
 */
 
 /*  external dependencies  */
-var Boom    = require("boom")
-var Ducky   = require("ducky")
-var Cache   = require("cache-lru")
+const Boom    = require("boom")
+const Ducky   = require("ducky")
+const Cache   = require("cache-lru")
 
 /*  internal dependencies  */
-var Package = require("./package.json")
+const pkg     = require("./package.json")
 
 /*  the AST cache  */
-var cache = new Cache()
+const cache = new Cache()
 cache.limit(100)
 
 /*  the HAPI plugin register function  */
-var register = function (server, options, next) {
+const register = async function (server, options) {
     /*  perform lazy compilation of Ducky schema specifications on all routes  */
-    server.ext({ type: "onRequest", method: function (request, reply) {
+    server.ext({ type: "onRequest", method: (request, h) => {
         /*  iterate over all routes  */
-        var connections = request.server.table()
-        connections.forEach(function (connection) {
-            connection.table.forEach(function (route) {
-                /*  lazy compile Ducky schema specification  */
-                var schema = Ducky.select(route, "settings.plugins.ducky")
-                if (typeof schema === "string") {
-                    var ast = cache.get(route.path)
-                    if (ast === undefined) {
-                        try {
-                            ast = Ducky.validate.compile(schema)
-                        }
-                        catch (ex) {
-                            throw new Error("invalid Ducky payload validation specification: " + ex.message)
-                        }
-                        cache.set(route.path, ast)
+        request.server.table().forEach((route) => {
+            /*  lazy compile Ducky schema specification  */
+            let schema = Ducky.select(route, "settings.plugins.ducky")
+            if (typeof schema === "string") {
+                let ast = cache.get(route.path)
+                if (ast === undefined) {
+                    try {
+                        ast = Ducky.validate.compile(schema)
                     }
+                    catch (ex) {
+                        throw new Error(`invalid Ducky payload validation specification: ${ex.message}`)
+                    }
+                    cache.set(route.path, ast)
                 }
-            })
+            }
         })
-        return reply.continue()
+        return h.continue
     }})
 
     /*  evaluate all Ducky schema specifications  */
-    server.ext({ type: "onPostAuth", method: function (request, reply) {
-        var ast = cache.get(request.route.path)
+    server.ext({ type: "onPostAuth", method: (request, h) => {
+        let ast = cache.get(request.route.path)
         if (ast !== undefined) {
-            var err = []
-            var valid = Ducky.validate.execute(request.payload, ast, err)
+            let err = []
+            let valid = Ducky.validate.execute(request.payload, ast, err)
             if (!valid)
-                return reply(Boom.badRequest("invalid payload: " + err.join("; ")))
+                return Boom.badRequest(`invalid payload: ${err.join("; ")}`)
         }
-        return reply.continue()
+        return h.continue
     }})
-
-    /*  continue processing  */
-    next()
 }
 
-/*  provide meta-information as expected by HAPI  */
-register.attributes = { pkg: Package }
-
 /*  export register function, wrapped in a plugin object  */
-module.exports = { register: register }
+module.exports = {
+    plugin: {
+        register: register,
+        pkg:      pkg
+    }
+}
 

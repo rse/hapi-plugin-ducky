@@ -17,17 +17,20 @@
     "homepage": "https://github.com/rse/hapi-plugin-ducky",
     "bugs":     "https://github.com/rse/hapi-plugin-ducky/issues",
     "peerDependencies": {
-        "hapi":        "<17.0.0"
+        "hapi":        ">=17.0.0"
     },
     "dependencies": {
-        "boom":        "5.2.0",
+        "boom":        "7.2.0",
         "ducky":       "2.6.4",
         "cache-lru":   "1.0.19"
     },
     "devDependencies": {
-        "hapi":        "16.6.3"
+        "hapi":        ">=17.0.0"
     },
     "engines": {
-        "node":        ">=4.0.0"
+        "node":        ">=8.0.0"
+    },
+    "scripts": {
+        "test":        "node test.js"
     }
 }
