@@ -17,20 +17,28 @@
     "homepage": "https://github.com/rse/hapi-plugin-ducky",
     "bugs":     "https://github.com/rse/hapi-plugin-ducky/issues",
     "peerDependencies": {
-        "hapi":        ">=17.0.0"
+        "hapi":                    ">=17.0.0"
     },
     "dependencies": {
-        "boom":        "7.2.0",
-        "ducky":       "2.6.4",
-        "cache-lru":   "1.0.19"
+        "boom":                    "7.2.0",
+        "ducky":                   "2.6.4",
+        "cache-lru":               "1.0.19"
     },
     "devDependencies": {
-        "hapi":        "17.2.3"
+        "hapi":                    "17.2.3",
+        "babel-eslint":            "8.2.2",
+        "eslint":                  "4.19.1",
+        "eslint-config-standard":  "11.0.0",
+        "eslint-plugin-standard":  "3.0.1",
+        "eslint-plugin-promise":   "3.7.0",
+        "eslint-plugin-import":    "2.9.0",
+        "eslint-plugin-node":      "6.0.1"
     },
     "engines": {
-        "node":        ">=8.0.0"
+        "node":                    ">=8.0.0"
     },
     "scripts": {
-        "test":        "node test.js"
+        "prepublishOnly":  "eslint --config eslint.yaml hapi-plugin-ducky.js",
+        "test":            "node test.js"
     }
 }
