@@ -29,7 +29,7 @@ Usage
 -----
 
 ```js
-server.register(require("hapi-plugin-ducky"))
+await server.register(require("hapi-plugin-ducky"))
 [...]
 server.route({
     method: "POST",
@@ -42,7 +42,7 @@ server.route({
             ducky: "{ username: string, password: string, keepLoggedIn?: boolean }"
         }
     },
-    handler: (request, reply) => {
+    handler: async (request, h) => {
         [...]
     }
 })
@@ -51,7 +51,7 @@ server.route({
 License
 -------
 
-Copyright (c) 2016 Ralf S. Engelschall (http://engelschall.com/)
+Copyright (c) 2016-2018 Ralf S. Engelschall (http://engelschall.com/)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
