@@ -35,7 +35,7 @@ const cache = new Cache()
 cache.limit(100)
 
 /*  the HAPI plugin register function  */
-const register = async function (server, options) {
+const register = async (server, options) => {
     /*  perform lazy compilation of Ducky schema specifications on all routes  */
     server.ext({ type: "onRequest", method: (request, h) => {
         /*  iterate over all routes  */
