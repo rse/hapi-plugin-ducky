@@ -34,7 +34,7 @@ await server.register(require("hapi-plugin-ducky"))
 server.route({
     method: "POST",
     path:   "/login",
-    config: {
+    options: {
         payload: {
             output: "data", parse: true, allow: "application/json"
         },
