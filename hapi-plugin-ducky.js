@@ -43,7 +43,7 @@ const register = async (server, options) => {
             /*  lazy compile Ducky schema specification  */
             let schema = Ducky.select(route, "settings.plugins.ducky")
             if (typeof schema === "string") {
-                let cacheKey = route.path + '.' + route.method
+                let cacheKey = `${route.path}.${route.method}`
                 let ast = cache.get(cacheKey)
                 if (ast === undefined) {
                     try {
@@ -61,7 +61,7 @@ const register = async (server, options) => {
 
     /*  evaluate all Ducky schema specifications  */
     server.ext({ type: "onPostAuth", method: (request, h) => {
-        let cacheKey = request.route.path + '.' + request.route.method
+        let cacheKey = `${request.route.path}.${request.route.method}`
         let ast = cache.get(cacheKey)
         if (ast !== undefined) {
             let err = []
