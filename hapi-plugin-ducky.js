@@ -43,7 +43,8 @@ const register = async (server, options) => {
             /*  lazy compile Ducky schema specification  */
             let schema = Ducky.select(route, "settings.plugins.ducky")
             if (typeof schema === "string") {
-                let ast = cache.get(route.path)
+                let cacheKey = route.path + '.' + route.method
+                let ast = cache.get(cacheKey)
                 if (ast === undefined) {
                     try {
                         ast = Ducky.validate.compile(schema)
@@ -51,7 +52,7 @@ const register = async (server, options) => {
                     catch (ex) {
                         throw new Error(`invalid Ducky payload validation specification: ${ex.message}`)
                     }
-                    cache.set(route.path, ast)
+                    cache.set(cacheKey, ast)
                 }
             }
         })
@@ -60,7 +61,8 @@ const register = async (server, options) => {
 
     /*  evaluate all Ducky schema specifications  */
     server.ext({ type: "onPostAuth", method: (request, h) => {
-        let ast = cache.get(request.route.path)
+        let cacheKey = request.route.path + '.' + request.route.method
+        let ast = cache.get(cacheKey)
         if (ast !== undefined) {
             let err = []
             let valid = Ducky.validate.execute(request.payload, ast, err)
