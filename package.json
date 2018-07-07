@@ -26,7 +26,6 @@
     },
     "devDependencies": {
         "hapi":                    "17.5.2",
-        "babel-eslint":            "8.2.5",
         "eslint":                  "5.0.1",
         "eslint-config-standard":  "11.0.0",
         "eslint-plugin-standard":  "3.1.0",
