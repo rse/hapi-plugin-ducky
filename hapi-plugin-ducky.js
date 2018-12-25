@@ -57,7 +57,7 @@ const register = async (server, options) => {
             }
         })
         return h.continue
-    }})
+    } })
 
     /*  evaluate all Ducky schema specifications  */
     server.ext({ type: "onPostAuth", method: (request, h) => {
@@ -70,7 +70,7 @@ const register = async (server, options) => {
                 return Boom.badRequest(`invalid payload: ${err.join("; ")}`)
         }
         return h.continue
-    }})
+    } })
 }
 
 /*  export register function, wrapped in a plugin object  */
