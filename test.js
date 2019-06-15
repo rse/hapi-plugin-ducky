@@ -1,5 +1,5 @@
 
-const HAPI      = require("hapi")
+const HAPI      = require("@hapi/hapi")
 const HAPIDucky = require("./hapi-plugin-ducky")
 
 ;(async () => {

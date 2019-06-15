@@ -23,7 +23,7 @@
 */
 
 /*  external dependencies  */
-const Boom    = require("boom")
+const Boom    = require("@hapi/boom")
 const Ducky   = require("ducky")
 const Cache   = require("cache-lru")
 
