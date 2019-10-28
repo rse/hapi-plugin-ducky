@@ -41,9 +41,9 @@ const register = async (server, options) => {
         /*  iterate over all routes  */
         request.server.table().forEach((route) => {
             /*  lazy compile Ducky schema specification  */
-            let schema = Ducky.select(route, "settings.plugins.ducky")
+            const schema = Ducky.select(route, "settings.plugins.ducky")
             if (typeof schema === "string") {
-                let cacheKey = `${route.path}.${route.method}`
+                const cacheKey = `${route.path}.${route.method}`
                 let ast = cache.get(cacheKey)
                 if (ast === undefined) {
                     try {
@@ -61,11 +61,11 @@ const register = async (server, options) => {
 
     /*  evaluate all Ducky schema specifications  */
     server.ext({ type: "onPostAuth", method: (request, h) => {
-        let cacheKey = `${request.route.path}.${request.route.method}`
-        let ast = cache.get(cacheKey)
+        const cacheKey = `${request.route.path}.${request.route.method}`
+        const ast = cache.get(cacheKey)
         if (ast !== undefined) {
-            let err = []
-            let valid = Ducky.validate.execute(request.payload, ast, err)
+            const err = []
+            const valid = Ducky.validate.execute(request.payload, ast, err)
             if (!valid)
                 return Boom.badRequest(`invalid payload: ${err.join("; ")}`)
         }
