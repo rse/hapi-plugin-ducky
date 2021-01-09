@@ -20,13 +20,13 @@
         "@hapi/hapi":              ">=18.0.0"
     },
     "dependencies": {
-        "@hapi/boom":              "9.1.0",
-        "ducky":                   "2.7.2",
-        "cache-lru":               "1.1.10"
+        "@hapi/boom":              "9.1.1",
+        "ducky":                   "2.7.3",
+        "cache-lru":               "1.1.11"
     },
     "devDependencies": {
         "@hapi/hapi":              "20.0.3",
-        "eslint":                  "7.14.0",
+        "eslint":                  "7.17.0",
         "eslint-config-standard":  "16.0.2",
         "eslint-plugin-promise":   "4.2.1",
         "eslint-plugin-import":    "2.22.1",
