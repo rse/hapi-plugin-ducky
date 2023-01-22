@@ -4,6 +4,7 @@
     "description": "HAPI plugin for validating payloads with Ducky",
     "keywords":    [ "hapi", "plugin", "validate", "payload", "ducky" ],
     "main":        "./hapi-plugin-ducky.js",
+    "types":       "./hapi-plugin-ducky.d.ts",
     "license":     "MIT",
     "repository": {
         "type": "git",
