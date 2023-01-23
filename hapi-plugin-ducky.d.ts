@@ -22,9 +22,11 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import * as HAPI from "@hapi/hapi"
+
 declare module "@hapi/hapi" {
     export interface PluginSpecificConfiguration {
-        ducky: string
+        ducky?: string
     }
 }
 
