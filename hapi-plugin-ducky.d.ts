@@ -22,7 +22,16 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import * as HAPI from "@hapi/hapi"
+import { Plugin } from "@hapi/hapi"
+
+declare namespace HAPIPluginDucky {
+    interface OptionalRegistrationOptions {
+    }
+}
+
+declare const HAPIPluginDucky: Plugin<HAPIPluginDucky.OptionalRegistrationOptions>
+
+export = HAPIPluginDucky
 
 declare module "@hapi/hapi" {
     export interface PluginSpecificConfiguration {
